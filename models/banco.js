@@ -1,7 +1,12 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('placar', 'root', '',{
-    host: 'localhost',
+const DB_NAME = 'placar'
+const USER_NAME = 'root'
+const PASSWORD = 'Bat#1104'
+const HOST = 'localhost'
+
+const sequelize = new Sequelize(DB_NAME, USER_NAME, PASSWORD,{
+    host: HOST,
     dialect: 'mysql',
 })
 
