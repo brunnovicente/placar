@@ -12,11 +12,8 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/placar/', (req, res) => {
-    Partida.findOne({
-        status: {
-            [Op.in]: [1,2],
-        },
+router.get('/placar/:id', (req, res) => {
+    Partida.findByPk(req.params.id, {
         include:{
             model: Torneio
         }

@@ -98,5 +98,14 @@ router.get('/atualizar/:id', (req, res) => {
     })
 })
 
+router.get('/finalizar/:id', (req, res) => {
+    Partida.findByPk(req.params.id).then(function(partida){
+        partida.status = 3
+        partida.save().then(function () {
+            req.flash('success_msg', 'Partida encerrada com sucesso!')
+            res.redirect('/torneio/view/'+partida.torneio_id);
+        })
+    })
+})
 
 module.exports = router;

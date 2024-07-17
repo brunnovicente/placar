@@ -3,6 +3,8 @@
     <span>
         <a id="btn_iniciar" href="/partida/iniciar/{{partida.id}}" class="btn btn-success"><i class="fa-solid fa-play"></i> Iniciar Tempo</a>
         <a id="btn_pausar" href="/partida/pausar/{{partida.id}}" class="btn btn-danger"><i class="fa-solid fa-pause"></i> Pausar Tempo</a>
+        <a id="btn_placar" href="/principal/placar/{{partida.id}}" class="btn btn-secondary" target="_blank"><i class="fa-solid fa-display"></i> Placar</a>
+        <a href="/torneio/view/{{partida.torneio.id}}" class="btn btn-outline-secondary">Voltar</a>
         <script>
             var status = {{partida.status}}
             if(status == 1){
@@ -12,15 +14,20 @@
                 document.getElementById('btn_pausar').style.display = 'none'
             }else if(status == 0){
                 document.getElementById('btn_pausar').style.display = 'none'
+                document.getElementById('btn_placar').style.display = 'none'
+            }else{
+                document.getElementById('btn_pausar').style.display = 'none'
+                document.getElementById('btn_iniciar').style.display = 'none'
+                document.getElementById('btn_placar').style.display = 'none'
             }
         </script>
-        <a href="/principal/placar" class="btn btn-secondary" target="_blank"><i class="fa-solid fa-display"></i> Placar</a>
-        <a href="/torneio/view/{{partida.torneio.id}}" class="btn btn-outline-secondary">Voltar</a>
+
     </span>
 </div>
 
 <div class="card">
     <div class="card-body">
+        <h3 class="text-center">{{partida.torneio.descricao}}</h3>
         <div class="row w-50 mx-auto">
             <div class="col-5">
                 <h2 class="text-center">{{partida.time1}}</h2>
@@ -33,9 +40,19 @@
             </div>
         </div>
         <div>
-            {{#if partida.status}}
-                <h5 class="text-center text-success">(Em andamento)</h5>
-            {{/if}}
+            <h5 id="progresso" class="text-center text-success">(Em andamento)</h5>
+            <script>
+                status = {{partida.status}}
+                if(status == 0){
+                    document.getElementById('progresso').textContent = '(Em Breve)'
+                }else if(status == 1){
+                    document.getElementById('progresso').textContent = '(Em Andamento)'
+                }else if(status == 2){
+                    document.getElementById('progresso').textContent = '(Pausada)'
+                }else{
+                    document.getElementById('progresso').textContent = '(Encerrada)'
+                }
+            </script>
         </div>
         <hr>
         <form action="/partida/pontuar" method="post">
@@ -76,10 +93,16 @@
         </form>
 
         <hr>
-        <div class="my-4 d-flex justify-content-around w-25 mx-auto">
-
-            <a href="#" class="btn btn-danger"><i class="fa-regular fa-square-check"></i> Finalizar Partida</a>
+        <div id="btn_fin" class="my-4 d-flex justify-content-around w-25 mx-auto">
+            <a href="/partida/finalizar/{{partida.id}}" class="btn btn-danger"><i class="fa-regular fa-square-check"></i> Finalizar Partida</a>
         </div>
+        <script>
+            status = {{partida.status}}
+            var logico = (status === '0') || (status === '3')
+            if((status === '0') || (status === '3')){
+                document.getElementById('btn_fin').style.display = 'none'
+            }
+        </script>
 
     </div>
 

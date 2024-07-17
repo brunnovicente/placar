@@ -1,13 +1,25 @@
-<div class="card p-2 w-75 mx-auto">
+<script>
+    var p = {{partida.torneio.descricao}}
+    console.log(p)
+</script>
+<div class="card p-2">
     <img src="/image/logo.png" class="w-25 d-block mx-auto">
     <h1 class="text-center mt-4" style="">{{partida.torneio.descricao}}</h1>
     <div class="card-body mt-4">
-        <h1 class="text-center">TEMPO</h1>
-        <div class="d-flex justify-content-center">
-            <span style="font-family: Orbitron, sans-serif; font-size: 12rem;" id="minuto">{{partida.tempo}}</span>
-            <span style="font-family: Orbitron, sans-serif; font-size: 12rem;">:</span>
-            <span style="font-family: Orbitron, sans-serif; font-size: 12rem;" id="segundo">00</span>
+        <div id="relogio">
+            <h1 class="text-center">TEMPO</h1>
+            <div class="d-flex justify-content-center">
+                <span style="font-family: Orbitron, sans-serif; font-size: 12rem;" id="minuto">{{partida.tempo}}</span>
+                <span style="font-family: Orbitron, sans-serif; font-size: 12rem;">:</span>
+                <span style="font-family: Orbitron, sans-serif; font-size: 12rem;" id="segundo">00</span>
+            </div>
         </div>
+        <script>
+            var tipo = {{partida.torneio.tipo}}
+            if(tipo === 2){
+                document.getElementById('relogio').style.display = 'none'
+            }
+        </script>
         <hr>
         <div class="row">
             <div class="col">
