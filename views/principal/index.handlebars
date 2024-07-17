@@ -1,0 +1,42 @@
+<div class="bg-light d-flex justify-content-between px-2 mb-2">
+        <h4 class="p-2">LISTA DE TORNEIOS</h4>
+        <a href="/torneio/add"><button class="btn btn-primary mt-2"><i class="fa-solid fa-plus"></i> Novo</button></a>
+</div>
+<div class="card">
+    <div class="card-body">
+        {{#each torneios}}
+            <div class="d-flex justify-content-between">
+                <h5>DESCRIÇÃO: {{descricao}}</h5>
+                <div>
+                    <a href="/torneio/view/{{id}}" class="btn btn-sm btn-success"><i class="fa-regular fa-folder-open"></i> Abrir</a>
+                    <a class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+                    <a class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> Excluir</a>
+                </div>
+            </div>
+            <STRONG>TIPO: </STRONG> <span id="tipo{{id}}"></span> <br>
+
+            <strong>STATUS:</strong> <span id="status{{id}}"></span>
+            <script>
+                var p_status = document.getElementById('status{{id}}')
+                var p_tipo = document.getElementById('tipo{{id}}')
+
+                var status = {{status}}
+                var tipo = {{tipo}}
+
+                if(status == 0){
+                    p_status.textContent = 'Finalizado'
+                }else{
+                    p_status.textContent = 'Ativo'
+                }
+
+                if(tipo == 1){
+                    p_tipo.textContent = 'FUTSAL'
+                }else{
+                    p_tipo.textContent = 'VOLEI'
+                }
+
+            </script>
+            <hr>
+        {{/each}}
+    </div>
+</div>

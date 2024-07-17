@@ -1,0 +1,98 @@
+<div class="card p-2 w-75 mx-auto">
+    <img src="/image/logo.png" class="w-25 d-block mx-auto">
+    <h1 class="text-center mt-4" style="">{{partida.torneio.descricao}}</h1>
+    <div class="card-body mt-4">
+        <h1 class="text-center">TEMPO</h1>
+        <div class="d-flex justify-content-center">
+            <span style="font-family: Orbitron, sans-serif; font-size: 12rem;" id="minuto">{{partida.tempo}}</span>
+            <span style="font-family: Orbitron, sans-serif; font-size: 12rem;">:</span>
+            <span style="font-family: Orbitron, sans-serif; font-size: 12rem;" id="segundo">00</span>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="text-center text-primary" style="font-size: 6rem;">
+                    {{partida.time1}}
+                </div>
+                <div class="border border-1 text-center bg-light w-50 mx-auto text-primary" style="font-size: 6rem;" id="ponto1">
+                    {{partida.ponto1}}
+                </div>
+            </div>
+
+            <div class="col">
+                <h5 class="text-center" style="font-size: 3rem">Set / Falta</h5>
+                <div class="row">
+                    <div class="col">
+                        <div class="border border-1 text-center " style="font-size: 6rem;" id="faltas1">
+                            {{partida.faltas1}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="border border-1 text-center " style="font-size: 6rem;" id="faltas2">
+                            {{partida.faltas2}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="text-center text-danger" style="font-size: 6rem;">
+                    {{partida.time2}}
+                </div>
+                <div class="border border-1 text-center bg-light w-50 mx-auto text-danger" style="font-size: 6rem;" id="ponto2">
+                    {{partida.ponto2}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        var minuto
+        {{#if partida}}
+            minuto = {{partida.tempo}}
+        {{else}}
+            minuto = 0
+        {{/if}}
+
+        var segundo = 0
+        document.getElementById('minuto').innerText = String(minuto)
+        var intervalo_id
+        function atualiza(){
+            fetch('/partida/atualizar/{{partida.id}}').then(response => response.json()).then(partida => {
+                document.getElementById('ponto1').innerText = partida.ponto1
+                document.getElementById('ponto2').innerText = partida.ponto2
+                document.getElementById('faltas1').innerText = partida.faltas1
+                document.getElementById('faltas2').innerText = partida.faltas2
+
+                if(partida.status == 1){
+                    if(segundo == 0){
+                        segundo = 59
+                        minuto--
+                        if(minuto < 10)
+                            document.getElementById('minuto').textContent = '0'+minuto.toString()
+                        else
+                            document.getElementById('minuto').textContent = minuto.toString()
+                    }
+                    if(segundo < 10)
+                        document.getElementById('segundo').textContent = '0'+segundo.toString()
+                    else
+                        document.getElementById('segundo').textContent = segundo.toString()
+                    segundo--
+                }
+                if(minuto == -1){
+                    document.getElementById('minuto').textContent = '00'
+                    document.getElementById('segundo').textContent = '00'
+                    clearInterval(intervalo_id)
+                }
+
+            }).catch(error => console.error('Erro ao buscar placar:', error));
+        }
+        intervalo_id = setInterval(atualiza, 1000);
+
+        document.addEventListener('DOMContentLoaded', (event)=>{
+            atualiza()
+        })
+
+
+</script>

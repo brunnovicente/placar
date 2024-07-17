@@ -1,0 +1,47 @@
+<div class="card">
+    <div class="bg-light d-flex justify-content-between p-2 mb-2">
+        <h5>TORNEIO: {{torneio.descricao}}</h5>
+        <div>
+            <a href="/partida/add/{{torneio.id}}"><button class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nova Partida</button></a>
+            <a href="/principal/placar" target="_blank"><button class="btn btn-info"><i class="fa-solid fa-desktop"></i> Placar</button></a>
+            <a href="/principal"><button class="btn btn-secondary"><i class="fa-solid fa-reply-all"></i> Voltar</button></a>
+        </div>
+    </div>
+    <div class="card-body">
+        {{#each partidas}}
+            <div class="card w-75 mx-auto">
+                <h3 class="text-center bg-light  ">{{time1}} X {{time2}}</h3>
+                <div class="card-body">
+                    <h5 id="andamento{{id}}"></h5>
+                    <script>
+                        var h5 = document.getElementById('andamento{{id}}')
+                        var status = {{status}}
+                        if(status == 1){
+                            h5.innerHTML = '<i class="fa-solid fa-person-running"></i> (Em andamento)'
+                            h5.classList = "text-success text-center mb-3"
+                        }else{
+                            if(status == 2){
+                                h5.textContent = '(Pausada)'
+                                h5.classList = 'text-secondary text-center mb-3'
+                            }else if(status == 1){
+                                h5.textContent = '(Em breve)'
+                                h5.classList = 'text-primary text-center mb-3'
+                            }else{
+                                h5.textContent = '(Encerrada)'
+                                h5.classList = 'text-danger text-center mb-3'
+                            }
+                        }
+                    </script>
+                    <div class="justify-content-center d-flex mt-4">
+                        <a href="/partida/gerenciar/{{id}}" class="btn btn-success"><i class="fa-solid fa-hourglass-half"></i> Gerenciar</a>
+                        <a href="/partida/gerenciar/{{id}}" class="btn btn-primary mx-2"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+                        <a href="/partida/gerenciar/{{id}}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Excluir</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr>
+        {{/each}}
+    </div>
+</div>

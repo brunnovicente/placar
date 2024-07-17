@@ -1,0 +1,21 @@
+
+<div class="card w-50 mx-auto">
+    <div class="bg-secondary p-2 d-flex justify-content-between">
+        <h5 class="text-white">Cadastrar Torneio</h5>
+        <a href="/" class="btn btn-outline-light">Voltar</a>
+    </div>
+    <div class="card-body">
+        <form action="/torneio/add" method="post">
+            <label for="descricao">DESCRIÇÃO</label>
+            <input class="form-control mb-3" type="text" name="descricao" id="descricao">
+            <label for="tipo">TIPO</label>
+            <select name="tipo" id="tipo" class="form-select mb-3 w-25">
+                <option value="1">Futsal</option>
+                <option value="2">Volei</option>
+            </select>
+            <label for="data">DATA</label>
+            <input type="date" name="data" class="form-control mb-3 w-25" id="data">
+            <button type="submit" class="btn btn-success mt-3">Cadastrar</button>
+        </form>
+    </div>
+</div>

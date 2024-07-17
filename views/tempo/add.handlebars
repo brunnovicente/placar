@@ -1,0 +1,19 @@
+<div class="card w-50 mx-auto">
+    <div class="bg-secondary p-2 d-flex justify-content-between">
+        <h5 class="text-white">Cadastrar Tempo</h5>
+        <a href="/torneio/view/{{partida.torneio.id}}" class="btn btn-outline-light">Voltar</a>
+    </div>
+    <div class="card-body">
+        <h5>PARTIDA: {{partida.time1}} X {{partida.time2}}</h5>
+        <form action="/tempo/add" method="post">
+            <input type="text" value="{{partida.id}}" hidden="hidden" name="partida_id">
+
+            <label for="descricao">Descrição</label>
+            <input class="form-control mb-3" type="text" name="descricao" id="descricao">
+
+            <label for="tempo">Tempo de Duração (Minutos)</label>
+            <input class="form-control mb-3" type="text" name="tempo" id="tempo">
+            <button type="submit" class="btn btn-success mt-3">Adicionar</button>
+        </form>
+    </div>
+</div>

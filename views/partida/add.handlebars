@@ -1,0 +1,17 @@
+
+<div class="card w-50 mx-auto">
+    <div class="bg-secondary p-2 d-flex justify-content-between">
+        <h5 class="text-white">Cadastrar Partida</h5>
+        <a href="/torneio/view/{{id}}" class="btn btn-outline-light">Voltar</a>
+    </div>
+    <div class="card-body">
+        <form action="/partida/add" method="post">
+            <input type="text" value="{{id}}" hidden="hidden" name="torneio_id">
+            <label for="time1">TIME 1</label>
+            <input class="form-control mb-3" type="text" name="time1" id="time1">
+            <label for="time2">TIME 2</label>
+            <input class="form-control mb-3" type="text" name="time2" id="time2">
+            <button type="submit" class="btn btn-success mt-3">Cadastrar</button>
+        </form>
+    </div>
+</div>
